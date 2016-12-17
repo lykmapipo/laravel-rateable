@@ -71,6 +71,10 @@ trait Rateable
             $userId = $this->loggedInUserId();
         }
         
+        if(is_null($rating)){
+            $rating = 1;
+        }
+        
         if($userId) {
             $rate = $this->ratings()
                 ->where('user_id', '=', $userId)
@@ -84,6 +88,7 @@ trait Rateable
     
             $rate = new Rating();
             $rate->user_id = $userId;
+            $rate->rating = $rating;
             $this->ratings()->save($rate);
         }
         else{
