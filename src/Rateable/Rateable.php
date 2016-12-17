@@ -85,11 +85,12 @@ trait Rateable
                 $rate->rating = $rating;
                 $rate->save();
             }
-    
-            $rate = new Rating();
-            $rate->user_id = $userId;
-            $rate->rating = $rating;
-            $this->ratings()->save($rate);
+            else{
+                $rate = new Rating();
+                $rate->user_id = $userId;
+                $rate->rating = $rating;
+                $this->ratings()->save($rate);
+            }
         }
         else{
             return;
