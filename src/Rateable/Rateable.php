@@ -62,17 +62,18 @@ trait Rateable
 
     /**
      * Add a rate for this record by the given user.
-     * @param $userId mixed - If null will use currently logged in user.
+     * 
      * @param $rating int - user rate
+     * @param $userId mixed - If null will use currently logged in user.
      */
-    public function rate($userId=null, $rating=1)
+    public function rate($rating = 1, $userId = null)
     {
-        if(is_null($userId)) {
-            $userId = $this->loggedInUserId();
-        }
-        
         if(is_null($rating)){
             $rating = 1;
+        }
+        
+        if(is_null($userId)) {
+            $userId = $this->loggedInUserId();
         }
         
         if($userId) {
