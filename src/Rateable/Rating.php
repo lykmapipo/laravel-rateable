@@ -2,9 +2,15 @@
 
 use Config;
 use Illuminate\Database\Eloquent\Model;
+use Alsofronie\Uuid\UuidModelTrait;
 
 class Rating extends Model
 {
+     /**
+     * Use Uuuid 32 as primary key
+     */
+    use UuidModelTrait;
+    
     /**
      * The attributes that are mass assignable.
      *
