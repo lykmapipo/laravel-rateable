@@ -59,4 +59,35 @@ trait Rateable
     {
         return $this->userSumRating();
     }
+
+    /**
+     * Add a rate for this record by the given user.
+     * @param $userId mixed - If null will use currently logged in user.
+     * @param $rating int - user rate
+     */
+    public function rate($userId=null, $rating=1)
+    {
+        if(is_null($userId)) {
+            $userId = $this->loggedInUserId();
+        }
+        
+        if($userId) {
+            $rate = $this->ratings()
+                ->where('user_id', '=', $userId)
+                ->first();
+    
+            //update rating
+            if($rate){
+                $rate->rating = $rating;
+                $rate->save();
+            }
+    
+            $rate = new Rating();
+            $rate->user_id = $userId;
+            $this->ratings()->save($rate);
+        }
+        else{
+            return;
+        }
+    }
 }
